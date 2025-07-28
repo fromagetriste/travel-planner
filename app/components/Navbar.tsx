@@ -13,7 +13,7 @@ export default function NavBar({ session }: { session: Session | null }) {
         <Link className="flex items-center" href={"/"}>
           <Image src={"/logo.png"} alt="logo" width={50} height={50} />
           <span className="text-2xl font-bold text-gray-800">
-            Travel Planner - ajouter pointer sur buttons
+            Travel Planner
           </span>
         </Link>
         <div className="flex items-center space-x-4">
