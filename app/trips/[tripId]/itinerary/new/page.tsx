@@ -1,4 +1,4 @@
-"use client";
+import NewLocationClient from "@/app/components/new-location";
 
 export default async function NewLocation({
   params,
@@ -6,4 +6,5 @@ export default async function NewLocation({
   params: Promise<{ tripId: string }>;
 }) {
   const { tripId } = await params;
+  return <NewLocationClient tripId={tripId} />;
 }
