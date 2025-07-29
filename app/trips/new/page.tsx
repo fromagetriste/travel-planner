@@ -18,6 +18,9 @@ export default function NewTrip() {
           <form
             className="space-y-6"
             action={(formData: FormData) => {
+              if (imageUrl) {
+                formData.append("imageUrl", imageUrl);
+              }
               startTransition(() => {
                 createTrip(formData);
               });
@@ -26,13 +29,14 @@ export default function NewTrip() {
             <div>
               <label
                 className="block text-sm font-medium text-gray-700 mb-1"
-                htmlFor=""
+                htmlFor="title"
               >
                 Title
               </label>
               <input
                 type="text"
                 name="title"
+                id="title"
                 className="w-full border border-gray-300 px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Japan Trip ..."
                 required
@@ -41,12 +45,13 @@ export default function NewTrip() {
             <div>
               <label
                 className="block text-sm font-medium text-gray-700 mb-1"
-                htmlFor=""
+                htmlFor="description"
               >
                 Description
               </label>
               <textarea
                 name="description"
+                id="description"
                 className="w-full border border-gray-300 px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="Trip Description ..."
                 required
@@ -56,12 +61,13 @@ export default function NewTrip() {
               <div>
                 <label
                   className="block text-sm font-medium text-gray-700 mb-1"
-                  htmlFor=""
+                  htmlFor="startdate"
                 >
                   Start Date
                 </label>
                 <input
                   type="date"
+                  id="startdate"
                   name="startDate"
                   className="w-full border border-gray-300 px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
@@ -69,28 +75,32 @@ export default function NewTrip() {
               <div>
                 <label
                   className="block text-sm font-medium text-gray-700 mb-1"
-                  htmlFor=""
+                  htmlFor="enddate"
                 >
                   End Date
                 </label>
                 <input
                   type="date"
                   name="endDate"
+                  id="enddate"
                   className="w-full border border-gray-300 px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
             </div>
             <div>
-              <label>Trip Image</label>
+              <label>Trip Image </label>
+
               {imageUrl && (
                 <Image
                   src={imageUrl}
                   alt="Trip Preview"
                   className="w-full mb-4 rounded-md max-h-48 object-cover"
-                  fill
+                  width={300}
+                  height={100}
                 />
               )}
               <UploadButton
+                className="ut-button:bg-blue-700 ut-button:ut-readying:bg-blue-500/50 ut-button:hover:bg-blue-600 transition"
                 endpoint="imageUploader"
                 onClientUploadComplete={(res) => {
                   if (res && res[0].ufsUrl) {
