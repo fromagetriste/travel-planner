@@ -7,13 +7,14 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 import { useState } from "react";
+import Map from "../components/map";
 
 export type TripWithLocation = Trip & {
   Locations: Location[];
 };
 
 interface TripDetailClientProp {
-  trip: Trip;
+  trip: TripWithLocation;
 }
 
 export default function TripDetailClient({ trip }: TripDetailClientProp) {
@@ -91,10 +92,16 @@ export default function TripDetailClient({ trip }: TripDetailClientProp) {
                     <MapPin className="h-6 mr-3 text-gray-500" />
                     <div>
                       <p>Destinations</p>
-                      <p>{trip.Locations.length}</p>
+                      <p>
+                        {trip.Locations.length}{" "}
+                        {trip.Locations.length === 1 ? "location" : "locations"}
+                      </p>
                     </div>
                   </div>
                 </div>
+              </div>
+              <div className="h-72 rounded-lg overflow-hidden shadow">
+                <Map itineraries={trip.Locations} />
               </div>
             </div>
           </TabsContent>
