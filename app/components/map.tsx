@@ -1,9 +1,26 @@
+"use client";
 import { Location } from "../generated/prisma";
+import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
 
 interface MapProps {
   itineraries: Location[];
 }
 
 export default function Map({ itineraries }: MapProps) {
-  return <></>;
+  const { isLoaded, loadError } = useLoadScript({
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!,
+  });
+  if (loadError) return <div>Error Loading Maps</div>;
+  if (!isLoaded) return <div>Loading Maps...</div>;
+  const center =
+    itineraries.length > 0
+      ? { lat: itineraries[0].lat, lng: itineraries[0].lng }
+      : { lat: 0, lng: 0 };
+  return (
+    <GoogleMap
+      mapContainerStyle={{ width: "100%", height: "100%" }}
+      zoom={12}
+      center={center}
+    ></GoogleMap>
+  );
 }

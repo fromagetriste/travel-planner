@@ -58,7 +58,7 @@ export default function TripDetailClient({ trip }: TripDetailClientProp) {
         <Tabs value={activeTab} onValueChange={setActiveTab}>
           <TabsList className="mb-6">
             <TabsTrigger value="overview" className="text-lg">
-              OverView
+              Overview
             </TabsTrigger>
             <TabsTrigger value="itinerary" className="text-lg">
               Itinerary
