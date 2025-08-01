@@ -150,6 +150,7 @@ export default function TripDetailClient({ trip }: TripDetailClientProps) {
             )}
           </TabsContent>
 
+        
           <TabsContent value="map" className="space-y-6">
             <div className="h-72 rounded-lg overflow-hidden shadow">
               <Map itineraries={trip.locations} />
@@ -165,6 +166,8 @@ export default function TripDetailClient({ trip }: TripDetailClientProps) {
                 </Link>
               </div>
             )}
+
+
           </TabsContent>
         </Tabs>
       </div>
