@@ -1,4 +1,5 @@
 import { auth } from "@/auth";
+import { getCountryFromCoordinates } from "@/lib/actions/geocode";
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
@@ -27,14 +28,21 @@ export async function GET() {
       },
     });
     const transformedLocations = await Promise.all(
-      locations.map(async (location) => {
+      locations.map(async (loc) => {
         const geocodeResult = await getCountryFromCoordinates(loc.lat, loc.lng);
+
         return {
           name: `${loc.trip.title} - ${geocodeResult.formattedAddress}`,
           lat: loc.lat,
           lng: loc.lng,
+          country: geocodeResult.country,
         };
       })
     );
-  } catch (err) {}
+      
+    return NextResponse.json(transformedLocations);
+
+  } catch (err) {
+      return new NextResponse("Internal Server Error", { status: 500 });
+  }
 }
