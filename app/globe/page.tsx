@@ -23,7 +23,7 @@ export interface TransformedLocation {
   name: string;
 }
 export default function GlobePage() {
-const globeRef = useRef<GlobeMethods>(undefined);
+  const globeRef = useRef<GlobeMethods>(undefined);
 
   const [visitedCountries, setVisitedCountries] = useState<Set<string>>(
     new Set()
@@ -78,7 +78,7 @@ const globeRef = useRef<GlobeMethods>(undefined);
             <div className="lg:col-span-2 bg-white rounded-xl shadow-lg overflow-hidden">
               <div className="p-6">
                 <h2 className="text-2xl font-semibold mb-4">
-                  See where you've been
+                  See where you have been
                 </h2>
                 <div className="h-[600px] w-full relative">
                   {isLoading ? (
@@ -119,7 +119,7 @@ const globeRef = useRef<GlobeMethods>(undefined);
                       <div className="space-y-4">
                         <div className="bg-blue-50 p-4 rounded-lg">
                           <p className="text-sm text-blue-800">
-                            You've visited{" "}
+                            You have visited{" "}
                             <span className="font-bold">
                               {visitedCountries.size}
                             </span>{" "}
