@@ -45,7 +45,8 @@ export default function NavBar({ session }: { session: Session | null }) {
             >
               Sign In
               <GitHubIcon />
-            </button>
+              </button>
+              
           )}
         </div>
       </div>

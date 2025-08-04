@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Globe, { GlobeMethods } from "react-globe.gl";
+import type { GlobeMethods } from "react-globe.gl";
+import dynamic from "next/dynamic";
+
 import {
   Card,
   CardContent,
@@ -10,6 +12,10 @@ import {
 } from "../components/ui/card";
 import { MapPin } from "lucide-react";
 
+const Globe = dynamic(() => import("react-globe.gl"), {
+  ssr: false,
+});
+
 export interface TransformedLocation {
   lat: number;
   lng: number;
@@ -17,7 +23,7 @@ export interface TransformedLocation {
   name: string;
 }
 export default function GlobePage() {
-  const globeRef = useRef<GlobeMethods | undefined>(undefined);
+const globeRef = useRef<GlobeMethods>(undefined);
 
   const [visitedCountries, setVisitedCountries] = useState<Set<string>>(
     new Set()
@@ -45,10 +51,20 @@ export default function GlobePage() {
     fetchLocations();
   }, []);
 
+  // rotate the globe with an interval as it needs to load before mounting
   useEffect(() => {
-    if (globeRef.current) {
-      globeRef.current.controls().autoRotate = true;
-    }
+    const interval = setInterval(() => {
+      if (globeRef.current) {
+        const controls = globeRef.current.controls();
+        if (controls) {
+          controls.autoRotate = true;
+          controls.autoRotateSpeed = 0.8;
+          clearInterval(interval);
+        }
+      }
+    }, 50);
+
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -70,20 +86,22 @@ export default function GlobePage() {
                       <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 "></div>
                     </div>
                   ) : (
-                    <Globe
-                      ref={globeRef}
-                      globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
-                      bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
-                      backgroundColor="rgba(0,0,0,0)"
-                      pointColor={() => "#FF5733"}
-                      pointLabel="name"
-                      pointsData={locations}
-                      pointRadius={0.5}
-                      pointAltitude={0.01}
-                      pointsMerge={true}
-                      width={800}
-                      height={600}
-                    />
+                    <div className="w-full h-[400px] sm:h-[600px] relative">
+                      <Globe
+                        ref={globeRef}
+                        globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
+                        bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
+                        backgroundColor="rgba(0,0,0,0)"
+                        pointColor={() => "#FF5733"}
+                        pointLabel="name"
+                        pointsData={locations}
+                        pointRadius={0.5}
+                        pointAltitude={0.01}
+                        pointsMerge={true}
+                        width={800}
+                        height={600}
+                      />
+                    </div>
                   )}
                 </div>
               </div>
