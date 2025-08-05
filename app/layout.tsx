@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   title: "Travel Planner",
   description: "Organise your trips with ease",
   icons: {
-    icon: "/public/favicon.ico",
+    icon: "/favicon.ico",
   },
 };
 
