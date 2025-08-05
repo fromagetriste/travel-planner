@@ -83,12 +83,11 @@ export default function GlobePage() {
                 <div className="h-[600px] w-full relative">
                   {isLoading ? (
                     <div className="flex items-center justify-center h-full">
-                      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 ">
-                        Up to 30 sec
-                      </div>
+                      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 "></div>
+                      <span>Up to 30 seconds ...</span>
                     </div>
                   ) : (
-                    <div className="relative w-full h-[400px] sm:h-[600px]">
+                    <div className="flex items-center justify-center relative w-full h-[400px] sm:h-[600px]">
                       <Globe
                         ref={globeRef}
                         globeImageUrl="//unpkg.com/three-globe/example/img/earth-blue-marble.jpg"
@@ -100,8 +99,8 @@ export default function GlobePage() {
                         pointRadius={0.5}
                         pointAltitude={0.01}
                         pointsMerge={true}
-                        // width={800}
-                        // height={600}
+                        width={500}
+                        height={500}
                       />
                     </div>
                   )}
