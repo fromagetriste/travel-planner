@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   title: "Travel Planner",
   description: "Organise your trips with ease",
   icons: {
-    icon: "/favicon.ico",
+    icon: "/public/favicon.ico",
   },
 };
 
@@ -27,7 +27,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await auth();
+  const session = await auth(); // Ensure auth has a method getSession
   return (
     <html lang="en">
       <body
