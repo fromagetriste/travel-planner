@@ -11,8 +11,8 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
     }),
   ],
   callbacks: {
-    async session({ session, token }) {
-      session.user.image = token.picture; 
+    async session({ session, token, user }) {
+      session.user.image = token.picture;
       return session;
     },
     async jwt({ token, account, profile }) {
