@@ -5,7 +5,6 @@ import Image from "next/image";
 import GoogleIcon from "./icons/GoogleIcon";
 import { login, logout } from "@/lib/auth.actions";
 import { Session } from "next-auth";
-import UserPhoto from "./UserPhoto";
 
 export default function NavBar({ session }: { session: Session | null }) {
   return (
@@ -36,7 +35,6 @@ export default function NavBar({ session }: { session: Session | null }) {
                 className="flex items-center justify-center bg-gray-800 hover:bg-gray-900 text-white p-2 rounded-sm cursor-pointer"
                 onClick={logout}
               >
-                <UserPhoto />
                 Sign Out
               </button>
             </>
