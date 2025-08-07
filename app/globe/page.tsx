@@ -84,6 +84,7 @@ export default function GlobePage() {
                   {isLoading ? (
                     <div className="flex items-center justify-center h-full">
                       <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 "></div>
+                      <br />
                       <span>Up to 30 seconds ...</span>
                     </div>
                   ) : (
@@ -111,6 +112,7 @@ export default function GlobePage() {
               <Card className="sticky top-8">
                 <CardHeader>
                   <CardTitle>Countries Visited</CardTitle>
+                  <br />
                   <CardContent>
                     {isLoading ? (
                       <div className="flex items-center justify-center h-full">
