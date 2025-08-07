@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import GitHubIcon from "./icons/GitHubIcon";
+import GoogleIcon from "./icons/GoogleIcon";
 import { login, logout } from "@/lib/auth.actions";
 import { Session } from "next-auth";
 
@@ -12,7 +12,7 @@ export default function NavBar({ session }: { session: Session | null }) {
       <div className="container mx-auto flex justify-between i tems-center px-6 lg:px-8">
         <Link className="flex items-center" href={"/"}>
           <Image src={"/logo.png"} alt="logo" width={50} height={50} />
-          <span className="text-2xl font-bold text-gray-800">
+          <span className="hidden md:block text-2xl font-bold text-gray-800">
             Travel Planner
           </span>
         </Link>
@@ -40,13 +40,12 @@ export default function NavBar({ session }: { session: Session | null }) {
             </>
           ) : (
             <button
-              className="flex items-center justify-center bg-gray-800 hover:bg-gray-900 text-white p-2 rounded-sm cursor-pointer"
+              className="flex items-center justify-center bg-slate-900 hover:bg-gray-700 text-white p-2 rounded-sm cursor-pointer"
               onClick={login}
             >
+              <GoogleIcon />
               Sign In
-              <GitHubIcon />
-              </button>
-              
+            </button>
           )}
         </div>
       </div>

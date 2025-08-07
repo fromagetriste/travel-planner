@@ -1,14 +1,28 @@
 import NextAuth from "next-auth";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "@/lib/prisma";
-import GitHubProvider from "next-auth/providers/github";
+import GoogleProvider from "next-auth/providers/google";
 
 export const { auth, handlers, signIn, signOut } = NextAuth({
   providers: [
-    GitHubProvider({
-      clientId: process.env.AUTH_GITHUB_ID!,
-      clientSecret: process.env.AUTH_GITHUB_SECRET!,
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
   ],
   adapter: PrismaAdapter(prisma),
 });
+
+
+
+// changed the Sign In option to switch from GitHub to Google instead
+// import GitHubProvider from "next-auth/providers/github";
+// export const { auth, handlers, signIn, signOut } = NextAuth({
+//   providers: [
+//     GitHubProvider({
+//       clientId: process.env.AUTH_GITHUB_ID!,
+//       clientSecret: process.env.AUTH_GITHUB_SECRET!,
+//     }),
+//   ],
+//   adapter: PrismaAdapter(prisma),
+// });
