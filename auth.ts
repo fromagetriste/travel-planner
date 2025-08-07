@@ -11,7 +11,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
     }),
   ],
   callbacks: {
-    async session({ session, token, user }) {
+    async session({ session, token }) {
       session.user.image = token.picture;
       return session;
     },
@@ -24,6 +24,8 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
   },
   adapter: PrismaAdapter(prisma),
 });
+
+export { handlers as GET, handlers as POST };
 
 // changed the Sign In option to switch from GitHub to Google instead
 // import GitHubProvider from "next-auth/providers/github";
